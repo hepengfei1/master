@@ -1,6 +1,5 @@
 @extends('layouts.default')
-
-@section('title','登录页')
+@section('title', '登录')
 
 @section('content')
     <div class="col-md-offset-2 col-md-8">
@@ -9,9 +8,9 @@
                 <h5>登录</h5>
             </div>
             <div class="panel-body">
-
                 @include('share._error')
-                <form method="POST" action="{{ route('users.store') }}">
+
+                <form method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -24,8 +23,17 @@
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                     </div>
 
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="remember"> 记住我</label>
+                    </div>
+
+
                     <button type="submit" class="btn btn-primary">登录</button>
                 </form>
+
+                <hr>
+
+                <p>还没账号？<a href="{{ route('users.create') }}">现在注册！</a></p>
             </div>
         </div>
     </div>
