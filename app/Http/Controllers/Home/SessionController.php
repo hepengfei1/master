@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 class SessionController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('guest',['only'=>['create']]);
+    }
 
     public function create()
     {
@@ -23,11 +27,11 @@ class SessionController extends Controller
 
         if (Auth::attempt($validate,$request->has('remember'))) {
             session()->flash('success','登录成功');
-            return redirect()->route('home');
+            return redirect()->intended(route('home'));
 
         } else {
             session()->flash('danger','登录失败，账号或密码不正确');
-            return redirect()->route('login')->withInput();
+            return redirect()->intended(route('login'))->withInput();
 
         }
     }
